@@ -42,4 +42,9 @@ public class Konto implements KontoInterface{
 		this.nummer = nummer;
 	}
 
+	@Override
+	public String toString() {
+		return "Konto [nummer=" + nummer + "]";
+	}
+
 }

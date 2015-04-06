@@ -14,4 +14,9 @@ public abstract class Kunde {
 	}
 	
 	public abstract String getAnrede();
+
+	@Override
+	public String toString() {
+		return "Kunde [konto=" + konto + "]";
+	}
 }

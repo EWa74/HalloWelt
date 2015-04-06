@@ -1,17 +1,12 @@
 package de.jave2enterprise.onlinebanking;
 
+import de.jave2enterprise.onlinebanking.model.kunde.GeschäftsKunde;
+
       
-public class Onlinebanking {
+public class Onlinebanking extends Object {
 
 	public static void main(String[] args) {
-		CalculatorInterface calc = new CalculatorInterface() {
-
-			@Override
-			public int add(int a, int b) {
-				return a+b;
-			}
-		};	
-		int c = calc.add(123, 456);
-		System.out.println(c);
+		
+		System.out.println(new GeschäftsKunde(123));
 	}
 }
