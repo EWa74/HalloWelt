@@ -2,7 +2,7 @@ package de.jave2enterprise.onlinebanking.model.konto;
 
 
 public class PrivatKonto extends Konto {
-	public PrivatKonto(int nummer){
+	public PrivatKonto(Integer nummer){
 		super();
 		super.setNummer(nummer);
 	}
