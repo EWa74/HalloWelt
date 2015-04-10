@@ -4,6 +4,7 @@ import de.java2enterprise.onlinebanking.model.konto.Konto;
 
 public abstract class Kunde {
 	private Konto konto;
+	private Bewertung bewertung;
 
 	public Konto getKonto() {
 		return konto;
@@ -18,5 +19,13 @@ public abstract class Kunde {
 	@Override
 	public String toString() {
 		return "Kunde [konto=" + konto + "]";
+	}
+
+	public Bewertung getBewertung() {
+		return bewertung;
+	}
+
+	public void setBewertung(Bewertung bewertung) {
+		this.bewertung = bewertung;
 	}
 }
