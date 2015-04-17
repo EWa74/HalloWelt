@@ -8,6 +8,6 @@ public class Onlinebanking
 	public static void main(String[] args) 
 	{
 		Consumer<String> c= Printer::new;
-		c.accept("Hallo Welt");
+		c.accept("Hallo Welt"); 
 	}
 } 
