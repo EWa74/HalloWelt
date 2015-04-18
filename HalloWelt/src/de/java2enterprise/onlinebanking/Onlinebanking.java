@@ -1,26 +1,29 @@
 package de.java2enterprise.onlinebanking;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
 
-public class Onlinebanking 
+public class Onlinebanking  
 {
 
 	public static void main(String[] args) 
 	{
-		List<Member> m = Member.getAllMembers();
-		
-		Map<Integer, List<Member>> grouped = m.stream().collect(
-				Collectors.groupingBy(Member::getTeam)
-				);
-		
-		Collection<List<Member>> c = grouped.values();
-		for (List<Member> member :c) {
-			member.stream().forEach(
-					a -> System.out.println(a.getTeam()+": " + a.getName())
-					);
+		int start = LocalDate.now().getYear()+1;
+		Builder<LocalDate> builder = Stream.builder();
+		for (int i = start; i< start+10; i++)
+		{
+			builder.add(LocalDate.of(i,  Month.JULY, 8));
 		}
+		builder
+			.build()
+			.forEach(
+					date -> System.out.println
+						(
+							date.format(DateTimeFormatter.ofPattern("yyyy: EEEE"))
+						)
+					);
 	}
 } 
