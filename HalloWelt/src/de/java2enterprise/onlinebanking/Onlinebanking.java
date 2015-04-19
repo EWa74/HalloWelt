@@ -1,29 +1,29 @@
 package de.java2enterprise.onlinebanking;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
-import java.util.stream.Stream.Builder;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 
 public class Onlinebanking  
 {
-
 	public static void main(String[] args) 
 	{
-		int start = LocalDate.now().getYear()+1;
-		Builder<LocalDate> builder = Stream.builder();
-		for (int i = start; i< start+10; i++)
-		{
-			builder.add(LocalDate.of(i,  Month.JULY, 8));
-		}
-		builder
-			.build()
-			.forEach(
-					date -> System.out.println
-						(
-							date.format(DateTimeFormatter.ofPattern("yyyy: EEEE"))
-						)
-					);
+		try(
+				InputStream		in 		= new FileInputStream("java8.jpg");
+				OutputStream	out 	= new FileOutputStream("kopie.jpg");
+			) 
+			{
+				int c;
+				while((c = in.read()) != -1)
+				{
+					out.write(c);
+				}
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 	}
 } 
