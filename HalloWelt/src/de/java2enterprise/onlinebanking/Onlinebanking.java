@@ -1,10 +1,10 @@
 package de.java2enterprise.onlinebanking;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 
 public class Onlinebanking  
@@ -12,14 +12,21 @@ public class Onlinebanking
 	public static void main(String[] args) 
 	{
 		try(
-				InputStream		in 		= new FileInputStream("java8.jpg");
-				OutputStream	out 	= new FileOutputStream("kopie.jpg");
+				BufferedReader	in 		= new BufferedReader(
+						new FileReader("jdbc.properties"));
+				BufferedWriter	out 	= new BufferedWriter(
+						new FileWriter("kopie.properties"));
 			) 
 			{
-				int c;
-				while((c = in.read()) != -1)
+				boolean anfang = true;
+				String str;
+				while((str = in.readLine()) != null)
 				{
-					out.write(c);
+					if(anfang==true)
+						anfang=false;
+					else
+						out.newLine();
+					out.write(str);
 				}
 			} catch (IOException e)
 			{
