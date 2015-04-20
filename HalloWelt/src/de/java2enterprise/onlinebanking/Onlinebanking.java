@@ -1,36 +1,31 @@
 package de.java2enterprise.onlinebanking;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 
 public class Onlinebanking  
 {
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
-		try(
-				BufferedReader	in 		= new BufferedReader(
-						new FileReader("jdbc.properties"));
-				BufferedWriter	out 	= new BufferedWriter(
-						new FileWriter("kopie.properties"));
-			) 
-			{
-				boolean anfang = true;
-				String str;
-				while((str = in.readLine()) != null)
-				{
-					if(anfang==true)
-						anfang=false;
-					else
-						out.newLine();
-					out.write(str);
-				}
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+		FileSystem fs = FileSystems.getDefault();
+		Path dir = fs.getPath("d:/workspace");
+		for(Path path : Files.newDirectoryStream(dir))
+		{
+			System.out.println
+			(
+					(Files.isDirectory(path) ? "d" : "-")  +
+					(Files.isReadable(path)  ? "r" : "-")  +
+					(Files.isWritable(path) ? "w" : "-")  +
+					(Files.isExecutable(path) ? "e" : "-")  +
+					(Files.isHidden(path) ? "h" : "-")  +
+					(Files.getOwner(path).getName()) + "\t " +
+					(Files.getLastModifiedTime(path)) + "\t " +
+					(path.getName(path.getNameCount()-1)) + "\t " 
+			);
+		}
 	}
 } 
