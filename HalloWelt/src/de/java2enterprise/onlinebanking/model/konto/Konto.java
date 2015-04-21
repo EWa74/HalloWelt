@@ -1,6 +1,12 @@
 package de.java2enterprise.onlinebanking.model.konto;
 
-public class Konto implements KontoInterface{
+import java.io.Serializable;
+
+public class Konto implements KontoInterface, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6180527234517614957L;
 	private int nummer;
 	
 	public Konto() {
