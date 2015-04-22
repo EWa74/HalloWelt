@@ -1,32 +1,41 @@
 package de.java2enterprise.onlinebanking;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import de.java2enterprise.onlinebanking.model.kunde.GeschäftsKunde;
-import de.java2enterprise.onlinebanking.model.kunde.Kunde;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class Onlinebanking  
 {
 	public static void main(String[] args) throws Exception 
 	{
-		Kunde kunde1 = new GeschäftsKunde(123);
-		ObjectOutputStream out = 
-				new ObjectOutputStream(new FileOutputStream("kunde.ser"));
-		out.writeObject(kunde1);
-		out.close();
-		
-		ObjectInputStream in =
-				new ObjectInputStream(new FileInputStream("kunde.ser"));
-		Object obj = in.readObject();
-		if(obj instanceof Kunde)
+		/* Treiber in die Laufzeit integrieren: */
+		Class.forName("com.mysql.jdbc.Driver"); 
+		Connection con = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/onlinebanking",
+				"app_user",
+				"app_user");
+		if (con.isValid(10)) 
 		{
-			Kunde kunde2 = (Kunde) obj;
-			System.out.println(kunde2);
+			System.out.println("Connected!");
+		}
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(
+				"select id, email, password " +
+				"from kunde");
+		while (rs.next())
+		{
+			int id = rs.getInt("id");
+			String email = rs.getString("email");
+			String password = rs.getString("password");
+			
+			System.out.println
+			(
+					id + " : " +
+					email  + " : " +
+					password
+			);				
 		}		
-		in.close();
 	}
-} 
+}
