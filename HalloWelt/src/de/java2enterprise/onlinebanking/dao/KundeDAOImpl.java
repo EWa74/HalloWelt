@@ -1,7 +1,8 @@
 package de.java2enterprise.onlinebanking.dao;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,17 +15,10 @@ public class KundeDAOImpl implements KundeDAO
 {
 
 	@Override
-	public List<Kunde> getKunden() throws ClassNotFoundException, SQLException 
+	public List<Kunde> getKunden() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException 
 	{
-		Class.forName("com.mysql.jdbc.Driver"); 
-		Connection con = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/onlinebanking",
-				"app_user",
-				"app_user");
-		if (con.isValid(10)) 
-		{
-			System.out.println("Connected!");
-		}
+		
+		Connection con = DataAccess.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(
 				"select id, email, password " +

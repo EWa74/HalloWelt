@@ -1,5 +1,7 @@
 package de.java2enterprise.onlinebanking.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class KundeServiceImpl implements KundeService {
 	 * @see de.java2enterprise.onlinebanking.service.KundeService#getKunden()
 	 */
 	@Override
-	public List<Kunde> getKunden() throws ClassNotFoundException, SQLException
+	public List<Kunde> getKunden() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException
 	{
 		KundeDAO kundeDAO = new KundeDAOImpl();
 		return kundeDAO.getKunden();
