@@ -35,4 +35,27 @@ public class KundeDAOImpl implements KundeDAO
 		return list;
 	}
 
+	@Override
+	public Kunde getKunden(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+		Connection con = DataAccess.getConnection();
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(
+				"select id, email, password " +
+				"from kunde " +
+				"where email = '" + email + "'" +
+				"and password = '" + password + "'");
+
+		Kunde kunde = null;
+		if(rs.next())
+		{
+			kunde =new Kunde();
+			kunde.setId(rs.getLong("id"));
+			kunde.setEmail(rs.getString("email"));
+			kunde.setPassword(rs.getString("password"));
+
+		}	
+		return kunde;
+		
+	}
+
 }

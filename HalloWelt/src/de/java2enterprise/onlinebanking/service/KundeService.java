@@ -11,5 +11,7 @@ public interface KundeService {
 
 	public abstract List<Kunde> getKunden() throws ClassNotFoundException,
 			SQLException, FileNotFoundException, IOException;
+	
+	public abstract boolean validate(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
 
 }

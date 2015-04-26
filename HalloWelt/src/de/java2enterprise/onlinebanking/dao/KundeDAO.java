@@ -9,5 +9,7 @@ import de.java2enterprise.onlinebanking.model.Kunde;
 
 public interface KundeDAO 
 {
-	public abstract List<Kunde> getKunden() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException; 
+	public abstract List<Kunde> getKunden() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException;
+
+	public abstract Kunde getKunden(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException; 
 }

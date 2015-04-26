@@ -11,16 +11,26 @@ public class Onlinebanking
 	{
 		/* Treiber in die Laufzeit integrieren: */
 		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten */
-			
-		KundeService kundeService = new KundeServiceImpl();
-		for(Kunde kunde :kundeService.getKunden())
+		
+		if(args.length <2)
 		{
-			System.out.println
-			(
-					kunde.getId() + " : " +
-					kunde.getEmail()  + " : " +
-					kunde.getPassword()
-			);				
+			System.out.println("Bitte geben Sie Ihre Benutzerdaten ein!");
+			System.exit(-1);
+		}
+		
+		KundeService kundeService = new KundeServiceImpl();
+		
+		if(kundeService.validate(args[0],  args[1]))
+		{
+			for(Kunde kunde :kundeService.getKunden())
+			{
+				System.out.println
+				(
+						kunde.getId() + " : " +
+						kunde.getEmail()  + " : " +
+						kunde.getPassword()
+				);				  
+			}
 		}
 	}
-}
+} 
