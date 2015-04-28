@@ -12,6 +12,8 @@ public class Onlinebanking
 		/* Treiber in die Laufzeit integrieren: */
 		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten */
 		
+		
+		
 		if(args.length <2)
 		{
 			System.out.println("Bitte geben Sie Ihre Benutzerdaten ein!");
@@ -32,5 +34,10 @@ public class Onlinebanking
 				);				  
 			}
 		}
+		
+		/*
+		KundeService kundeService = new KundeServiceImpl();
+		kundeService.createKunde("schmidt@java2enterprise.de", "Katze#4711");
+		*/
 	}
 } 

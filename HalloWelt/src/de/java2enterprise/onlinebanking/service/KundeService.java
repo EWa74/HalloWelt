@@ -13,5 +13,6 @@ public interface KundeService {
 			SQLException, FileNotFoundException, IOException;
 	
 	public abstract boolean validate(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
-
+	
+	public abstract void createKunde(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
 }

@@ -23,12 +23,18 @@ public class KundeServiceImpl implements KundeService {
 	@Override
 	public boolean validate(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
 		KundeDAO kundeDAO = new KundeDAOImpl();
-		Kunde kunde = kundeDAO.getKunden(email, password);
+		Kunde kunde = kundeDAO.getKunde(email, password);
 		if(kunde !=null)
 		{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void createKunde(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+		KundeDAO kundeDAO = new KundeDAOImpl();
+		kundeDAO.createKunde(email, password);
 	}
 
 }

@@ -36,15 +36,18 @@ public class KundeDAOImpl implements KundeDAO
 	}
 
 	@Override
-	public Kunde getKunden(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+	public Kunde getKunde(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+		
 		Connection con = DataAccess.getConnection();
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery(
+		java.sql.PreparedStatement stmt = con.prepareStatement(
 				"select id, email, password " +
 				"from kunde " +
-				"where email = '" + email + "'" +
-				"and password = '" + password + "'");
-
+				"where email =  ?" +
+				"and password = ?");
+		stmt.setString(1,  email);
+		stmt.setString(2,  password);		
+		ResultSet rs = stmt.executeQuery();
+		
 		Kunde kunde = null;
 		if(rs.next())
 		{
@@ -55,6 +58,19 @@ public class KundeDAOImpl implements KundeDAO
 
 		}	
 		return kunde;
+		
+	}
+
+	@Override
+	public void createKunde(String email, String password) 
+			throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
+		Connection con = DataAccess.getConnection();
+		java.sql.PreparedStatement stmt = con.prepareStatement(
+				"insert into kunde (email, password) " +
+				"values(?, ?)");
+		stmt.setString(1,  email);
+		stmt.setString(2,  password);		
+		stmt.execute();
 		
 	}
 

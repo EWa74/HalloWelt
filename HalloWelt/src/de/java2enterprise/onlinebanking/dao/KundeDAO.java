@@ -11,5 +11,8 @@ public interface KundeDAO
 {
 	public abstract List<Kunde> getKunden() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException;
 
-	public abstract Kunde getKunden(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException; 
+	public abstract Kunde getKunde(String email, String password) 
+			throws ClassNotFoundException, FileNotFoundException, SQLException, IOException; 
+	
+	public abstract void createKunde(String email, String password) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException;
 }
