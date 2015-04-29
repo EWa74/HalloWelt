@@ -32,7 +32,7 @@ public class Onlinebanking  extends Frame
 		setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		
 		try{ Thread.sleep(2000);} catch(InterruptedException e){};
-		dispose();	
+		dispose();	 
 	}
 	
 	public void paint(Graphics g)
