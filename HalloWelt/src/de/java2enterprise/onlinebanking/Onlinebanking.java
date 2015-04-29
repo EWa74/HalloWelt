@@ -1,43 +1,44 @@
 package de.java2enterprise.onlinebanking;
 
-import de.java2enterprise.onlinebanking.model.Kunde;
-import de.java2enterprise.onlinebanking.service.KundeService;
-import de.java2enterprise.onlinebanking.service.KundeServiceImpl;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 
-public class Onlinebanking  
+public class Onlinebanking  extends Frame
 {
 	public static void main(String[] args) throws Exception 
 	{
 		/* Treiber in die Laufzeit integrieren: */
 		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten */
-		
-		
-		
-		if(args.length <2)
-		{
-			System.out.println("Bitte geben Sie Ihre Benutzerdaten ein!");
-			System.exit(-1);
-		}
-		
-		KundeService kundeService = new KundeServiceImpl();
-		
-		if(kundeService.validate(args[0],  args[1]))
-		{
-			for(Kunde kunde :kundeService.getKunden())
-			{
-				System.out.println
-				(
-						kunde.getId() + " : " +
-						kunde.getEmail()  + " : " +
-						kunde.getPassword()
-				);				  
-			}
-		}
-		
-		/*
-		KundeService kundeService = new KundeServiceImpl();
-		kundeService.createKunde("schmidt@java2enterprise.de", "Katze#4711");
-		*/
+		new Onlinebanking();
 	}
+		
+	public Onlinebanking()
+	{
+		setSize(400, 300);
+		setLocation(200, 200);
+		setTitle("Onlinebanking");
+		setVisible(true);
+		
+		Image image = Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg");
+		setIconImage(image);
+		
+		setForeground(Color.WHITE);
+		setBackground(Color.DARK_GRAY);
+		setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		
+		try{ Thread.sleep(2000);} catch(InterruptedException e){};
+		dispose();	
+	}
+	
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+		g.drawString("Hallo Kunde", 100, 100);
+	}
+	
 } 
