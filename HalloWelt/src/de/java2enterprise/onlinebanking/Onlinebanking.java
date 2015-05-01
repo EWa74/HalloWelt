@@ -3,8 +3,6 @@ package de.java2enterprise.onlinebanking;
 import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -15,7 +13,7 @@ import de.java2enterprise.onlinebanking.view.MyLabel;
 import de.java2enterprise.onlinebanking.view.MyTextField;
 
  
-public class Onlinebanking  extends Frame implements ActionListener
+public class Onlinebanking  extends Frame  
 {
 	private Panel loginPanel = new Panel();
 	private MyLabel lUsername = new MyLabel(20,50, "Username:");
@@ -48,8 +46,30 @@ public class Onlinebanking  extends Frame implements ActionListener
 		getLoginPanel().add(bOK);
 		getLoginPanel().add(bCancel);
 		
-		bOK.addActionListener(this);
-		bCancel.addActionListener(this);
+		bOK.addActionListener( e -> 
+				{
+					try
+					{
+						KundeService kundeService = new KundeServiceImpl();
+						String email = getTfUsername().getText();
+						String password = getTfPassword().getText();
+						boolean valid = kundeService.validate(email, password);
+						if(valid)
+						{
+							System.out.println("Sie wurden authentifiziert!");
+						}else
+						{
+							System.out.println("Ungültige Anmeldung!");
+						}
+					} catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}	
+				});
+		bCancel.addActionListener( e ->
+		{
+			System.out.println("Cancel Button betätigt!");
+		});
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg"));
 		setVisible(true);
@@ -102,30 +122,4 @@ public class Onlinebanking  extends Frame implements ActionListener
 		this.tfPassword = tfPassword;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals("OK"))
-		{
-			try
-			{
-				KundeService kundeService = new KundeServiceImpl();
-				String email = getTfUsername().getText();
-				String password = getTfPassword().getText();
-				boolean valid = kundeService.validate(email, password);
-				if(valid)
-				{
-					System.out.println("Sie wurden authentifiziert!");
-				}else
-				{
-					System.out.println("Ungültige Anmeldung!");
-				}
-			} catch(Exception ex)
-			{
-				ex.printStackTrace();
-			}
-		} else {
-			System.out.println("Cancel Button betätigt!");
-		}		
-	}
 } 
