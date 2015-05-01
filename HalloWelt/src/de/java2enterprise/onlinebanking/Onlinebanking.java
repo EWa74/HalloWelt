@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import de.java2enterprise.onlinebanking.view.MyLabel;
 import de.java2enterprise.onlinebanking.view.MyTextField;
 
-
+ 
 public class Onlinebanking  extends Frame 
 {
 	private Panel loginPanel = new Panel();
