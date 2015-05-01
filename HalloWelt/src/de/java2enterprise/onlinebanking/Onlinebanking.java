@@ -6,15 +6,18 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 
-public class Onlinebanking  extends Frame
+public class Onlinebanking  extends Frame 
 {
 	public static void main(String[] args) throws Exception 
 	{
 		/* Treiber in die Laufzeit integrieren: */
 		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten */
-		new Onlinebanking();
+		new Onlinebanking(); 
 	}
 		
 	public Onlinebanking()
@@ -23,22 +26,12 @@ public class Onlinebanking  extends Frame
 		setLocation(200, 200);
 		setTitle("Onlinebanking");
 		setVisible(true);
-		
-		Image image = Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg");
-		setIconImage(image);
-		
-		setForeground(Color.WHITE);
-		setBackground(Color.DARK_GRAY);
-		setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		
-		try{ Thread.sleep(2000);} catch(InterruptedException e){};
-		dispose();	 
+		/* Anonyme Klasse mit WindowAdapter: */
+		addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent event)
+			{
+				dispose();
+			}
+		});	
 	}
-	
-	public void paint(Graphics g)
-	{
-		super.paint(g);
-		g.drawString("Hallo Kunde", 100, 100);
-	}
-	
 } 
