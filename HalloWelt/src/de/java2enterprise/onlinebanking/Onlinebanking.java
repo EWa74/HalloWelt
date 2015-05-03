@@ -1,12 +1,14 @@
 package de.java2enterprise.onlinebanking;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import de.java2enterprise.onlinebanking.service.KundeService;
 import de.java2enterprise.onlinebanking.service.KundeServiceImpl;
@@ -15,9 +17,9 @@ import de.java2enterprise.onlinebanking.view.MyLabel;
 import de.java2enterprise.onlinebanking.view.MyTextField;
 
  
-public class Onlinebanking  extends Frame  
+public class Onlinebanking  extends JFrame  
 {
-	private Panel loginPanel = new Panel();
+	private JPanel loginPanel = new JPanel();
 	private MyLabel lUsername = new MyLabel("Username:");
 	private MyTextField tfUsername = new MyTextField();
 	private MyLabel lPassword = new MyLabel("Password:");
@@ -80,20 +82,15 @@ public class Onlinebanking  extends Frame
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg"));
 		setVisible(true);
-		addWindowListener( new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent event)
-			{
-				dispose();
-			}
-		});
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public Panel getLoginPanel() {
+
+	public JPanel getLoginPanel() {
 		return loginPanel;
 	}
 
-	public void setLoginPanel(Panel loginPanel) {
+	public void setLoginPanel(JPanel loginPanel) {
 		this.loginPanel = loginPanel;
 	}
 

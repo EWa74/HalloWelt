@@ -1,14 +1,15 @@
 package de.java2enterprise.onlinebanking.view;
 
-import java.awt.Button;
 import java.awt.Dimension;
 
-public class MyButton extends Button 
+import javax.swing.JButton;
+
+public class MyButton extends JButton 
 {
 	public MyButton(String text)
 	{
 		setPreferredSize(new Dimension(100, 25));
-		setLabel(text);
+		setText(text);
 		setActionCommand(text);
 	}
 

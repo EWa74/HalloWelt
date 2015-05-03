@@ -1,9 +1,10 @@
 package de.java2enterprise.onlinebanking.view;
 
 import java.awt.Dimension;
-import java.awt.Label;
 
-public class MyLabel extends Label {
+import javax.swing.JLabel;
+
+public class MyLabel extends JLabel {
 	public MyLabel(String text)
 	{
 		setPreferredSize(new Dimension(100, 25));
