@@ -1,12 +1,12 @@
 package de.java2enterprise.onlinebanking.view;
 
+import java.awt.Dimension;
 import java.awt.TextField;
 
 public class MyTextField extends TextField {
-	public MyTextField(int x, int y)
+	public MyTextField()
 	{
-		setLocation(x,y);
-		setSize(100,25);
+		setPreferredSize(new Dimension(100, 25));
 	}
 
 }

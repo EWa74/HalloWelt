@@ -1,6 +1,8 @@
 package de.java2enterprise.onlinebanking;
 
+import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -16,12 +18,14 @@ import de.java2enterprise.onlinebanking.view.MyTextField;
 public class Onlinebanking  extends Frame  
 {
 	private Panel loginPanel = new Panel();
-	private MyLabel lUsername = new MyLabel(20,50, "Username:");
-	private MyTextField tfUsername = new MyTextField(150, 50);
-	private MyLabel lPassword = new MyLabel(20,100, "Password:");
-	private MyTextField tfPassword = new MyTextField(150, 100);
-	private MyButton bOK = new MyButton(20, 150, "OK");
-	private MyButton bCancel = new MyButton(150, 150, "Cancel");
+	private MyLabel lUsername = new MyLabel("Username:");
+	private MyTextField tfUsername = new MyTextField();
+	private MyLabel lPassword = new MyLabel("Password:");
+	private MyTextField tfPassword = new MyTextField();
+	private MyButton bOK = new MyButton("OK");
+	private MyButton bCancel = new MyButton("Cancel");
+	private MyLabel lHeadline = new MyLabel("Onlinebanking");
+	private MyLabel lStatus = new MyLabel("waiting ...");
 	
 	
 	public static void main(String[] args) throws Exception 
@@ -36,9 +40,12 @@ public class Onlinebanking  extends Frame
 		setSize(400, 300);
 		setLocation(200, 200);
 		setTitle("Onlinebanking");
-		getLoginPanel().setLayout(null);
-		
+		setLayout( new BorderLayout(30, 30));
+		getLoginPanel().setLayout( new GridLayout(3,2, 30,30));
 		add(loginPanel);
+		add(lHeadline, BorderLayout.NORTH);
+		add(lStatus, BorderLayout.SOUTH);
+		
 		getLoginPanel().add(lUsername);
 		getLoginPanel().add(tfUsername);
 		getLoginPanel().add(lPassword);
@@ -56,19 +63,19 @@ public class Onlinebanking  extends Frame
 						boolean valid = kundeService.validate(email, password);
 						if(valid)
 						{
-							System.out.println("Sie wurden authentifiziert!");
+							getlStatus().setText("Sie wurden authentifiziert!");
 						}else
 						{
-							System.out.println("Ungültige Anmeldung!");
+							getlStatus().setText("Ungültige Anmeldung!");
 						}
 					} catch(Exception ex)
 					{
-						ex.printStackTrace();
+						getlStatus().setText(ex.getMessage());
 					}	
 				});
 		bCancel.addActionListener( e ->
 		{
-			System.out.println("Cancel Button betätigt!");
+			getlStatus().setText("Cancel Button betätigt!");
 		});
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg"));
@@ -120,6 +127,38 @@ public class Onlinebanking  extends Frame
 
 	public void setTfPassword(MyTextField tfPassword) {
 		this.tfPassword = tfPassword;
+	}
+
+	public MyButton getbOK() {
+		return bOK;
+	}
+
+	public void setbOK(MyButton bOK) {
+		this.bOK = bOK;
+	}
+
+	public MyButton getbCancel() {
+		return bCancel;
+	}
+
+	public void setbCancel(MyButton bCancel) {
+		this.bCancel = bCancel;
+	}
+
+	public MyLabel getlHeadline() {
+		return lHeadline;
+	}
+
+	public void setlHeadline(MyLabel lHeadline) {
+		this.lHeadline = lHeadline;
+	}
+
+	public MyLabel getlStatus() {
+		return lStatus;
+	}
+
+	public void setlStatus(MyLabel lStatus) {
+		this.lStatus = lStatus;
 	}
 
 } 
