@@ -1,8 +1,8 @@
 package de.java2enterprise.onlinebanking;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,6 +14,7 @@ import de.java2enterprise.onlinebanking.service.KundeService;
 import de.java2enterprise.onlinebanking.service.KundeServiceImpl;
 import de.java2enterprise.onlinebanking.view.MyButton;
 import de.java2enterprise.onlinebanking.view.MyLabel;
+import de.java2enterprise.onlinebanking.view.MyPasswordField;
 import de.java2enterprise.onlinebanking.view.MyTextField;
 
  
@@ -23,7 +24,7 @@ public class Onlinebanking  extends JFrame
 	private MyLabel lUsername = new MyLabel("Username:");
 	private MyTextField tfUsername = new MyTextField();
 	private MyLabel lPassword = new MyLabel("Password:");
-	private MyTextField tfPassword = new MyTextField();
+	private MyPasswordField tfPassword = new MyPasswordField();
 	private MyButton bOK = new MyButton("OK");
 	private MyButton bCancel = new MyButton("Cancel");
 	private MyLabel lHeadline = new MyLabel("Onlinebanking");
@@ -61,7 +62,7 @@ public class Onlinebanking  extends JFrame
 					{
 						KundeService kundeService = new KundeServiceImpl();
 						String email = getTfUsername().getText();
-						String password = getTfPassword().getText();
+						String password = new String(getTfPassword().getPassword());
 						boolean valid = kundeService.validate(email, password);
 						if(valid)
 						{
@@ -81,8 +82,25 @@ public class Onlinebanking  extends JFrame
 		});
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg"));
+		getContentPane().setBackground(Color.WHITE);
+		getLoginPanel().setBackground(Color.WHITE);
+		addWindowListener(new WindowAdapter() 
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				setVisible(false);
+				dispose(); /* ruft automatisch windowClosed() auf*/
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});	
+		
 		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
 
@@ -118,11 +136,12 @@ public class Onlinebanking  extends JFrame
 		this.lPassword = lPassword;
 	}
 
-	public MyTextField getTfPassword() {
+	
+	public MyPasswordField getTfPassword() {
 		return tfPassword;
 	}
 
-	public void setTfPassword(MyTextField tfPassword) {
+	public void setTfPassword(MyPasswordField tfPassword) {
 		this.tfPassword = tfPassword;
 	}
 
