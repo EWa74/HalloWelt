@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.java2enterprise.onlinebanking.service.KundeService;
@@ -15,6 +16,7 @@ import de.java2enterprise.onlinebanking.service.KundeServiceImpl;
 import de.java2enterprise.onlinebanking.view.MyButton;
 import de.java2enterprise.onlinebanking.view.MyLabel;
 import de.java2enterprise.onlinebanking.view.MyPasswordField;
+import de.java2enterprise.onlinebanking.view.MyTable;
 import de.java2enterprise.onlinebanking.view.MyTextField;
 
  
@@ -28,7 +30,7 @@ public class Onlinebanking  extends JFrame
 	private MyButton bOK = new MyButton("OK");
 	private MyButton bCancel = new MyButton("Cancel");
 	private MyLabel lHeadline = new MyLabel("Onlinebanking");
-	private MyLabel lStatus = new MyLabel("waiting ...");
+	private MyTable table;
 	
 	
 	public static void main(String[] args) throws Exception 
@@ -38,7 +40,7 @@ public class Onlinebanking  extends JFrame
 		new Onlinebanking(); 
 	}
 		
-	public Onlinebanking()
+	public Onlinebanking() throws Exception
 	{
 		setSize(400, 300);
 		setLocation(200, 200);
@@ -47,7 +49,7 @@ public class Onlinebanking  extends JFrame
 		getLoginPanel().setLayout( new GridLayout(3,2, 30,30));
 		add(loginPanel);
 		add(lHeadline, BorderLayout.NORTH);
-		add(lStatus, BorderLayout.SOUTH);
+
 		
 		getLoginPanel().add(lUsername);
 		getLoginPanel().add(tfUsername);
@@ -66,19 +68,19 @@ public class Onlinebanking  extends JFrame
 						boolean valid = kundeService.validate(email, password);
 						if(valid)
 						{
-							getlStatus().setText("Sie wurden authentifiziert!");
+							JOptionPane.showMessageDialog(this, "Sie wurden authentifiziert!");
 						}else
 						{
-							getlStatus().setText("Ungültige Anmeldung!");
+							JOptionPane.showMessageDialog(this, "Ungültige Anmeldung!");
 						}
 					} catch(Exception ex)
 					{
-						getlStatus().setText(ex.getMessage());
+						JOptionPane.showMessageDialog(this,ex.getMessage());
 					}	
 				});
 		bCancel.addActionListener( e ->
 		{
-			getlStatus().setText("Cancel Button betätigt!");
+			JOptionPane.showMessageDialog(this,"Cancel Button betätigt!");
 		});
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("onlinebanking.jpg"));
@@ -99,7 +101,8 @@ public class Onlinebanking  extends JFrame
 				System.exit(0);
 			}
 		});	
-		
+		add(new MyTable(), BorderLayout.SOUTH);
+		pack();
 		setVisible(true);
 	}
 
@@ -169,12 +172,5 @@ public class Onlinebanking  extends JFrame
 		this.lHeadline = lHeadline;
 	}
 
-	public MyLabel getlStatus() {
-		return lStatus;
-	}
-
-	public void setlStatus(MyLabel lStatus) {
-		this.lStatus = lStatus;
-	}
 
 } 
