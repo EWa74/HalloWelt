@@ -8,6 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -102,6 +105,17 @@ public class Onlinebanking  extends JFrame
 			}
 		});	
 		add(new MyTable(), BorderLayout.SOUTH);
+		
+		JMenuBar mb = new JMenuBar();
+		JMenu menu = new JMenu("Programm");
+		mb.add(menu);
+		
+		JMenuItem miBeenden = new JMenuItem("Beenden");
+		miBeenden.addActionListener(e -> System.exit(0));
+		menu.add(miBeenden);
+		
+		setJMenuBar(mb);
+			
 		pack();
 		setVisible(true);
 	}
