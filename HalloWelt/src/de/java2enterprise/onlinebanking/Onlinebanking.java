@@ -39,7 +39,7 @@ public class Onlinebanking  extends JFrame
 	public static void main(String[] args) throws Exception 
 	{
 		/* Treiber in die Laufzeit integrieren: */
-		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten */
+		/* Beachte: den Dienst mysqld vom command window ("DOS-Fenster") aus starten Bei WIN8 als Admin!!*/
 		new Onlinebanking(); 
 	}
 		
